@@ -1,24 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import Home from "./Home/Home";
+import Login from "./Login/Login";
+import NavBar from "./NavBar/NavBar";
+import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
+import Register from "./Register/Register";
+import { fetchUsersFromAPI, fetchUsersFromDB } from "./Store/fetchUsers";
+import { userActions } from "./Store/userSlice";
+import Users from "./Users/Users";
 
 function App() {
+  const usersList = useSelector((state) => state.users.usersList);
+  const searchInput = useSelector((state) => state.users.searchInput);
+  const [users, setUsers] = useState(usersList);
+  const [filteredList, setFilteredList] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUsersFromAPI());
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchUsersFromDB());
+  }, []);
+
+  useEffect(() => {
+    setUsers(usersList);
+    setFilteredList(usersList);
+  }, [usersList]);
+
+  useEffect(() => {
+    const filteredUsers = usersList.filter((user) => {
+      let firstName = user.first_name.toLocaleLowerCase();
+      let last_name = user.last_name.toLocaleLowerCase();
+      return (
+        firstName.includes(searchInput.toLocaleLowerCase()) ||
+        last_name.includes(searchInput.toLocaleLowerCase())
+      );
+    });
+    setFilteredList(filteredUsers);
+  }, [searchInput]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/users" element={<Users data={filteredList} />} />
+      </Routes>
+    </Fragment>
   );
 }
 

@@ -1,0 +1,26 @@
+.nav-container {
+  position: fixed;
+  top: 85%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  text-align: center;
+  margin: auto;
+  padding: 3px;
+  border-radius: 35px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-container .link {
+  background-color: #fff;
+  padding: 15px 25px;
+  text-decoration: none;
+  border-radius: 25px;
+  color: #000;
+  transition: 0.5s;
+}
+
+.nav-container .active {
+  background-color: #619b8a;
+  color: #fff;
+}

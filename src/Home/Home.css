@@ -1,0 +1,97 @@
+.home-container {
+  position: absolute;
+  display: grid;
+  top: 36px;
+  transform: translate(-50%);
+  grid-template-columns: 1fr 2fr;
+  width: 1040px;
+  height: 75vh;
+  background-color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.left {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-container {
+  width: 50%;
+  margin-top: 50px;
+}
+.image-container img {
+  width: 100%;
+}
+
+.profile-description {
+  margin-top: 30px;
+}
+
+.profile-description h3 {
+  margin-bottom: 20px;
+}
+
+.title-edit {
+  display: flex;
+  gap: 6px;
+}
+.title-edit i {
+  cursor: pointer;
+  transition: 300ms;
+  color: #999;
+}
+
+.right {
+  background-color: #233d4d;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: #fff;
+}
+.right-container {
+  margin-left: 100px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.action-btns {
+  position: absolute;
+  display: flex;
+  gap: 10px;
+  right: 0;
+  padding: 10px;
+}
+.action-btn {
+  width: 100%;
+  border-radius: 10px;
+  border-color: transparent;
+  background-color: #619b8a;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: small;
+  transition: 300ms;
+}
+.action-btn:hover,
+.action-btn:active {
+  background-color: #ade8f4;
+}
+
+.admin {
+  position: absolute;
+  margin-top: 15px;
+  font-weight: 600;
+  background-color: green;
+  color: white;
+  padding: 5px 10px 5px 20px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.external_link {
+  color: white;
+}

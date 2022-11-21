@@ -1,0 +1,9 @@
+.users-container {
+  position: absolute;
+  top: 10px;
+  height: 80%;
+  width: 80%;
+  transform: translate(-50%);
+  border: 3px solid #f1f1f1;
+  /* text-align: center; */
+}

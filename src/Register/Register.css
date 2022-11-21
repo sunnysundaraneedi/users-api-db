@@ -1,0 +1,26 @@
+.register-form {
+  top: 30px;
+  width: 50%;
+}
+
+.register-form .input-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+}
+
+.register-form h3 {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.register-form input[type="text"],
+input[type="password"] {
+  width: 100%;
+  font-size: 12px;
+  padding: 12px 10px;
+  margin: 4px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
