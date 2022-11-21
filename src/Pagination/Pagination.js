@@ -14,7 +14,7 @@ const Pagination = ({ data, title, pageLimit, dataLimit }) => {
 
   useEffect(() => {
     setPages(Math.ceil(data.length / dataLimit));
-  }, [users]);
+  }, [users, data, dataLimit]);
 
   const [currentPage, setCurrentPage] = useState(1);
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userActions } from "../Store/userSlice";
 import "./Login.css";
@@ -8,7 +8,6 @@ const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const navigate = useNavigate();
-  const isAuthenticated = useSelector((state) => state.users.isAuthenticated);
 
   const dispatch = useDispatch();
 

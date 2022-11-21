@@ -7,26 +7,25 @@ import NavBar from "./NavBar/NavBar";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import Register from "./Register/Register";
 import { fetchUsersFromAPI, fetchUsersFromDB } from "./Store/fetchUsers";
-import { userActions } from "./Store/userSlice";
 import Users from "./Users/Users";
 
 function App() {
   const usersList = useSelector((state) => state.users.usersList);
   const searchInput = useSelector((state) => state.users.searchInput);
-  const [users, setUsers] = useState(usersList);
+  // const [users, setUsers] = useState(usersList);
   const [filteredList, setFilteredList] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUsersFromAPI());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchUsersFromDB());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    setUsers(usersList);
+    // setUsers(usersList);
     setFilteredList(usersList);
   }, [usersList]);
 
