@@ -29,17 +29,17 @@ function App() {
     setFilteredList(usersList);
   }, [usersList]);
 
+  const filteredUsers = usersList.filter((user) => {
+    let firstName = user.first_name.toLocaleLowerCase();
+    let last_name = user.last_name.toLocaleLowerCase();
+    return (
+      firstName.includes(searchInput.toLocaleLowerCase()) ||
+      last_name.includes(searchInput.toLocaleLowerCase())
+    );
+  });
   useEffect(() => {
-    const filteredUsers = usersList.filter((user) => {
-      let firstName = user.first_name.toLocaleLowerCase();
-      let last_name = user.last_name.toLocaleLowerCase();
-      return (
-        firstName.includes(searchInput.toLocaleLowerCase()) ||
-        last_name.includes(searchInput.toLocaleLowerCase())
-      );
-    });
     setFilteredList(filteredUsers);
-  }, [searchInput]);
+  }, [searchInput, filteredUsers]);
 
   return (
     <Fragment>
