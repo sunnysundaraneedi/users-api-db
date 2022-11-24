@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import EditProfile from "../EditProfile/EditProfile";
 import { userActions } from "../Store/userSlice";
 import "./Home.css";
 
