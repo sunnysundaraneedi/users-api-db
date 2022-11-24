@@ -74,4 +74,21 @@ table {
   font-size: 32px;
   color: #fff;
   margin-left: 8px;
+  transition: 500ms;
+}
+.back-btn:hover {
+  color: #000;
+}
+
+.sort {
+  color: #fff;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 500ms;
+}
+.sort:hover {
+  transform: scale(1.1);
+  color: #000;
 }

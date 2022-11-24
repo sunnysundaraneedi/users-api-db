@@ -15,6 +15,14 @@ export const fetchUsersFromDB = () => {
             }))
           )
         );
+        dispatch(
+          userActions.setNewUsers(
+            snapShot.docs.map((doc) => ({
+              id: doc.id,
+              data: doc.data(),
+            }))
+          )
+        );
       });
     };
     fetchUsersHandler();

@@ -6,7 +6,6 @@ import User from "../User/User";
 import "./Pagination.css";
 
 const Pagination = ({ data, title, pageLimit, dataLimit }) => {
-  const users = useSelector((state) => state.users.usersList);
   const search = useSelector((state) => state.users.searchInput);
   const dispatch = useDispatch();
 
@@ -14,7 +13,7 @@ const Pagination = ({ data, title, pageLimit, dataLimit }) => {
 
   useEffect(() => {
     setPages(Math.ceil(data.length / dataLimit));
-  }, [users, data, dataLimit]);
+  }, [data.length, dataLimit]);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -46,6 +45,10 @@ const Pagination = ({ data, title, pageLimit, dataLimit }) => {
     dispatch(userActions.searchQuery(event.target.value));
   };
 
+  const sortHandler = () => {
+    dispatch(userActions.reverseUsers());
+  };
+
   return (
     <div>
       <h1 className="title">{title}</h1>
@@ -55,7 +58,7 @@ const Pagination = ({ data, title, pageLimit, dataLimit }) => {
           className="back-btn"
           onClick={() => dispatch(userActions.loginClass())}
         >
-          <i class="uil uil-arrow-circle-left"></i>
+          <i className="uil uil-arrow-circle-left"></i>
         </Link>
 
         <input
@@ -71,10 +74,14 @@ const Pagination = ({ data, title, pageLimit, dataLimit }) => {
           <thead>
             <tr clas>
               <th>AGE</th>
-              <th>FIRST NAME</th>
+              <th>
+                FIRST NAME
+                <i class="uil uil-direction sort" onClick={sortHandler}></i>
+              </th>
               <th>LAST NAME</th>
               <th>EMAIL</th>
               <th>CITY</th>
+              <th>WEB</th>
             </tr>
           </thead>
           <tbody>

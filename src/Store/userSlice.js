@@ -5,9 +5,12 @@ const userSlice = createSlice({
   initialState: {
     usersList: [],
     searchInput: "",
+    newUsers: [],
     // login Slice
     currentUser: {},
+    finalUser: [],
     isAuthenticated: false,
+    showModal: false,
     // nav classes
     classes: {
       login: "link active",
@@ -20,7 +23,7 @@ const userSlice = createSlice({
     },
     setUsersList: (state, action) => {
       let data = action.payload.map((user) => user.data);
-
+      // console.log(action.payload.data);
       const finalData = data.filter((x) => {
         return !state.usersList.some((y) => {
           return y.id === x.id;
@@ -28,6 +31,18 @@ const userSlice = createSlice({
       });
 
       state.usersList = Array.from([...state.usersList, ...finalData]);
+      state.usersList.sort((a, b) => {
+        let fa = a.first_name.toLowerCase();
+        let fb = b.first_name.toLowerCase();
+
+        if (fa < fb) {
+          return -1;
+        }
+        if (fa > fb) {
+          return 1;
+        }
+        return 0;
+      });
     },
     filterUsersList: (state, action) => {
       state.usersList = action.payload;
@@ -62,7 +77,7 @@ const userSlice = createSlice({
 
     setCurrentUser: (state, action) => {
       const loginEmail = action.payload;
-      const result = state.users.find((user) => user.data.email === loginEmail);
+      const result = state.usersList.find((user) => user.email === loginEmail);
       state.currentUser = result;
     },
 
@@ -74,6 +89,18 @@ const userSlice = createSlice({
     },
     usersClass: (state) => {
       state.classes = { users: "link active", login: "link" };
+    },
+    reverseUsers: (state) => {
+      state.usersList.reverse();
+    },
+    setNewUsers: (state, action) => {
+      state.newUsers = action.payload;
+    },
+    setFinalUser: (state) => {
+      const result = state.newUsers.find(
+        (user) => user.data.email === state.currentUser.email
+      );
+      state.finalUser = result;
     },
   },
 });

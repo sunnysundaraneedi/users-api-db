@@ -1,17 +1,27 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import EditProfile from "../EditProfile/EditProfile";
 import { userActions } from "../Store/userSlice";
 import "./Home.css";
 
 const Home = () => {
+  const newUsers = useSelector((state) => state.users.newUsers);
+  const user = useSelector((state) => state.users.currentUser);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.users.currentUser);
+
+  const emails = newUsers.map((user) => user.data.email);
+  const editable = emails.includes(user.email);
 
   const logoutHandler = () => {
     navigate("/");
     dispatch(userActions.logUserOut());
+  };
+
+  const modalHandler = () => {
+    dispatch(userActions.showHideModal());
   };
 
   const externalLink = user.web.includes("http")
@@ -78,6 +88,11 @@ const Home = () => {
           <button className="action-btn" onClick={logoutHandler}>
             Logout
           </button>
+          {editable && (
+            <button className="action-btn" onClick={modalHandler}>
+              Update Profile
+            </button>
+          )}
         </div>
       </div>
     </Fragment>
