@@ -23,7 +23,6 @@ const userSlice = createSlice({
     },
     setUsersList: (state, action) => {
       let data = action.payload.map((user) => user.data);
-      // console.log(action.payload.data);
       const finalData = data.filter((x) => {
         return !state.usersList.some((y) => {
           return y.id === x.id;

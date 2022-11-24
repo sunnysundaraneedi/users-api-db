@@ -11,10 +11,10 @@ const EditProfile = () => {
   const newUsers = useSelector((state) => state.users.newUsers);
   const dispatch = useDispatch();
 
-  console.log(user);
   dispatch(userActions.setFinalUser(user));
-  const finalUser = newUsers.find((user) => user.email === user.email);
-  console.log("fina:", finalUser);
+  const finalUser = newUsers.find((newuser) => {
+    return newuser.data.email === user.email;
+  });
 
   const [inputFields, setInputFields] = useState({
     ...user,
@@ -26,9 +26,7 @@ const EditProfile = () => {
   };
   const submitHandler = async (event) => {
     event.preventDefault();
-    console.log(finalUser.id);
     const taskDocRef = doc(db, "users", finalUser.id);
-    console.log(taskDocRef);
     try {
       await updateDoc(taskDocRef, {
         first_name: inputFields.first_name,
@@ -42,14 +40,12 @@ const EditProfile = () => {
         age: inputFields.age,
         id: user.id,
       });
-      alert("Updated, you will see the change in few minutes");
-      console.log(inputFields);
+      alert("Updated, logout and login to see the changes");
       dispatch(userActions.showHideModal());
     } catch (error) {
       console.log("Something went wrong : ", error);
     }
   };
-  console.log(inputFields);
 
   return (
     <Modal>

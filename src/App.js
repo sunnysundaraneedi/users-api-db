@@ -33,7 +33,6 @@ function App() {
   }, [usersList]);
 
   useEffect(() => {
-    console.log("ran");
     const filteredUsers = usersList.filter((user) => {
       let firstName = user.first_name.toLocaleLowerCase();
       let last_name = user.last_name.toLocaleLowerCase();
@@ -44,8 +43,6 @@ function App() {
     });
     setFilteredList(filteredUsers);
   }, [searchInput, usersList]);
-
-  console.log(usersList);
 
   return (
     <Fragment>
